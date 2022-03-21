@@ -1,0 +1,91 @@
+.messageClass{
+    margin-left: 90px;
+    height: 70%;
+    width: 80%;
+}
+.margin{
+    margin: auto;
+    
+}
+.slds-tabs{
+    margin-left: 6%;
+    margin-right: 1%;
+    position: fixed !important;
+    overflow: hidden;
+}
+.default a{
+    
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 0.2px;
+    color: #808080 ;
+    
+}
+.default a:hover{
+    text-decoration: none;
+    color: red ;
+    border-bottom:2px solid #41ad49;
+}
+.hide{
+    display: none;
+   color: blue;  
+}
+
+a:hover + .hide {
+    display: block;
+    background-color: black ;
+    position: absolute;
+}
+ul{
+    position: fixed important;
+    overflow: hidden;
+
+}
+.slds-tabs ul{
+    position: fixed important;
+}
+ul[c-headerDefault_headerDefault] {
+    position: fixed !important;
+    overflow: hidden;
+    color: #e5f1e6;
+}
+.new{
+    display: none;
+   color: blue;  
+}
+
+li:hover + .new {
+    display: block;
+    background-color: black ;
+    transition: 0.2s;
+}
+.nav-link li::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #41ad49;
+    transition: 0.2s;
+}
+.slds-tabs{
+    width: 100%;
+}
+.sub-menu{
+position: absolute;
+}
+a:hover + .hide[c-headerDefault_headerDefault] {
+    display: block;
+    color: blue;
+}
+.menubar a:hover + .hide { 
+    display: block;
+    background-color: black ;
+    position: absolute;
+} 
+li.slds-tabs_default__item.default:hover .new {
+    display: block;
+}
+li.slds-tabs_default__item.default:hover .hide {
+    display: block;
+}
+

@@ -1,0 +1,77 @@
+    <template>
+    <div class="container">
+        <div>
+    <div class="slds-grid slds-gutters">
+    <div class="slds-col slds-size_3-of-12">
+        <span class="messageClass" onclick={spanClick}>
+        <img src={misti}></span>
+    </div>
+    <div class="slds-col slds-size_3-of-12">
+        <span><lightning-input type="text" 
+        placeholder="Search"
+        onchange={handleAccountName} ></lightning-input> 
+        </span>
+    </div>
+    <div class="slds-col slds-size_3-of-12 margin">
+        <span><lightning-button variant="destructive" label="Search" title="Looks like a link" onclick={handleClick} class="slds-m-left_x-small"></lightning-button></span>
+    </div>
+    <div class="slds-col slds-size_3-of-12 ">
+        <span></span>
+    </div>
+    </div>
+    <!--lightning-tabset>
+    <lightning-tab label="Item One"> </lightning-tab>
+        <lightning-tab label="Item Two"> </lightning-tab>
+
+    </lightning-tabset!-->
+    <div class="slds-tabs">
+    <ul class="slds-tabs_default__nav menu" role="menubar">
+        <!-- Tabs -->
+        <!-- Home tab -->
+        <li class="slds-tabs_default__item default" title="Home">
+            <a onclick={viewHome} class="slds-tabs_default__link nav-link" data-tab="home">Home</a>
+        </li>
+        <li class="slds-tabs_default__item default" title="Leads" >
+            <a onclick={hoverLeads} aria-haspopup="true" class="slds-tabs_default__link nav-link" data-tab="lead" >Leads
+                <lightning-icon icon-name="utility:chevrondown" size="x-small" ></lightning-icon>
+            </a>
+            <div class="new" > 
+                <ul class="sub-men">
+                    <li id="menu-item-2959" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2959 close-item"><a href="https://escalon.services/risk-done-general-liability/" class="nav-link">Test 123</a></li>
+                    <li id="menu-item-2958" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2958 close-item"><a href="https://escalon.services/risk-done-epli/" class="nav-link">AA 123</a></li>
+                    </ul>
+            </div>
+        </li>
+        <li class="slds-tabs_default__item default" title="orders" >
+            <a onclick={viewOrders} aria-haspopup="true" onmouseover={hoverorders} class="slds-tabs_default__link nav-link" data-tab="orders" >orders
+                <lightning-icon icon-name="utility:chevrondown" size="x-small" ></lightning-icon>
+                
+            </a>
+            <div class="hide"> 
+                <ul class="sub-menu">
+                    <li id="menu-item-295" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2959 close-item"><a href="https://escalon.services/risk-done-general-liability/" class="nav-link">General Liability</a></li>
+                    <li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2958 close-item"><a href="https://escalon.services/risk-done-epli/" class="nav-link">EPLI</a></li>
+                    </ul>
+            </div>
+        </li>
+        <li class="slds-tabs_default__item default" title="Home">
+            <a onclick={viewHome} class="slds-tabs_default__link nav-link" data-tab="home">Resources & Tools</a>
+        </li>
+        <li class="slds-tabs_default__item default" title="Home">
+            <a onclick={viewHome} class="slds-tabs_default__link nav-link" data-tab="home">Programs</a>
+        </li>
+        <li class="slds-tabs_default__item default" title="Home">
+            <a onclick={viewHome} class="slds-tabs_default__link nav-link" data-tab="home">Multimedia</a>
+        </li>
+        <li class="slds-tabs_default__item default" title="Home">
+            <a onclick={viewHome} class="slds-tabs_default__link nav-link" data-tab="home">Support</a>
+        </li>
+        <li class="slds-tabs_default__item default" title="Home">
+            <a onclick={viewHome} class="slds-tabs_default__link nav-link" data-tab="home">Learning</a>
+        </li>
+        </ul>
+        </div>
+        </div>
+    </div>
+
+    </template>

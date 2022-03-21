@@ -1,0 +1,242 @@
+<!-- sldsValidatorIgnore -->
+<template>
+<lightning-card if:false={showDetailPage} title="List of Alumni">
+<lightning-button-icon icon-name="utility:add" slot="actions" onclick={customShowModalPopup}></lightning-button-icon>
+
+</lightning-card>      
+<template if:true={customFormModal}>
+<!-- Model Start -->
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+    
+    <header class="slds-modal__header">
+        <button class="slds-button slds-modal__close slds-button_icon-inverse" title="Close" onclick={customHideModalPopup}>
+            <lightning-icon icon-name="utility:close"
+            alternative-text="close"
+            variant="inverse"
+            size="small" ></lightning-icon>
+            <span class="slds-assistive-text">Close</span>
+        </button>
+        <h2 class="slds-text-heading_medium slds-hyphenate">Add a Alumni</h2>
+    </header>
+    
+    <div class="slds-modal__content slds-p-around_medium">
+    
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+            <lightning-input type="text" label="Name" onchange={handleNameChange}></lightning-input>
+        </div>
+<div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+    <lightning-record-edit-form object-api-name="Alumni__c" id="createContactForm" >
+        <lightning-input-field field-name="Student__c"  onchange={handleSearchSelection}> </lightning-input-field>
+    </lightning-record-edit-form>
+        </div>
+<div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+            <lightning-input type="date" label="Start Date" onchange={handleStartDateChange}></lightning-input>
+        </div>
+<div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+            <lightning-input type="date" label="End Date" onchange={handleEndDateChange}></lightning-input>
+        </div>
+</div>
+
+    <footer class="slds-modal__footer">           
+        <button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
+    </footer>
+</div>
+</div>
+</section>
+<!-- Model End -->
+<div class="slds-backdrop slds-backdrop_open">
+</div>
+</template>
+<!-- Object in List  -->
+<template  if:false={showDetailPage}>
+    <lightning-layout class="slds-border_left" horizontal-align="space">
+        <lightning-layout-item flexibility="auto">
+            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+            </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+            Page {page} of {totalPage}
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+                onclick={nextHandler}></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+    <div class="slds-var-p-around_x-small">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr class="">
+                    <th class="slds-size_2-of-12" scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    
+                    <th class="slds-size_2-of-12" scope="col">
+                        <div class="slds-truncate" title="Student">Student Name</div>
+                    </th>
+                    <th class="slds-size_2-of-12" scope="col">
+                        <div class="slds-truncate" title="Start Date">Start Date</div>
+                    </th>
+                    <th class="slds-size_2-of-12" scope="col">
+                        <div class="slds-truncate" title="End Date">End Date</div>
+                    </th>
+                </tr>
+            </thead>
+        <tbody>
+            <template for:each = {data} for:item = "item" for:index="indexVar">
+                <tr data-record-id={item.Id}  key={item.Id} class="slds-hint-parent" onclick={handleFunction}>
+                    <td class="slds-size_2-of-12" >
+                        <div>
+                            
+                                <lightning-formatted-text data-record-id={item.Id} value={item.Name} label={item.Name}></lightning-formatted-text>
+                                
+                        </div>
+                    </td>
+                      
+                    <td class="slds-size_2-of-12" >
+                        <div>
+                            
+                                <lightning-formatted-url data-record-id={item.Id} value={item.StudentName} label={item.StudentName}  ></lightning-formatted-url>
+                                
+                        </div>
+                    </td>
+                    <td class="slds-size_2-of-12" >
+                        <div  title="Prospecting">
+                            
+                                <lightning-formatted-text data-record-id={item.Id} value={item.Start_Date__c} label={item.Start_Date__c} ></lightning-formatted-text>
+                                
+                        </div>
+                    </td>
+                    <td class="slds-size_2-of-12" >
+                        <div  title="Prospecting">
+                            
+                                <lightning-formatted-text data-record-id={item.Id} value={item.End_Date__c} label={item.End_Date__c} ></lightning-formatted-text>
+                                
+                        </div>
+                    </td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+    </div>
+<!-- <lightning-datatable 
+data={data} 
+columns={columns} 
+key-field="Id"  
+onrowselection={handleFunction}
+selected-rows={selection}
+oncellchange={handleCellChange}
+suppress-bottom-bar="false"
+hide-checkbox-column="false"
+>
+</lightning-datatable>
+-->
+</template>
+<!-- End of Object List -->
+<!-- Detail Page -->
+<template if:true={showDetailPage}>
+    <lightning-card title="Alumni">
+        <lightning-button 
+            label="Back" 
+            icon-name="utility:back" 
+            slot="actions"
+            onclick={handleBack}>
+        </lightning-button>
+        <lightning-button 
+        label="Edit" 
+        icon-name="utility:edit" 
+        slot="actions"
+        onclick={handleEdit}>
+    </lightning-button>
+        <lightning-button 
+            icon-name="utility:delete" 
+            slot="actions"  
+            onclick={handleDelete}>
+        </lightning-button>
+    </lightning-card>
+    <lightning-card>
+    <lightning-tabset>
+        <lightning-tab label="Detail" >
+            <template for:each = {detailValue} for:item = "item" for:index="indexVar">
+                <div class="slds-grid slds-wrap" key={item.key}>
+                    <div class="slds-col slds-size_1-of-2 slds-max-small-size_1-of-1">
+                        <lightning-input class="slds-p-around_small" value={item.Name} label="Name:"></lightning-input>
+                        <!-- <lightning-formatted-text class="slds-p-around_small" value={item.Name} label="Name:"></lightning-formatted-text> -->
+                        <!-- <h3 class="slds-p-around_medium">Name:   {item.Name}</h3> -->
+                        <!-- <p>{item.Name}</p> -->
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-max-small-size_1-of-1">
+                        <lightning-input class="slds-p-around_small" value={item.Student__c} type="url" label="Student:"></lightning-input>
+                        <!-- <lightning-formatted-url class="slds-p-around_small" value={item.Student__c} label="Student:"></lightning-formatted-url> -->
+                        <!-- <h3  class="slds-p-around_medium">Student:   {item.Student__c}</h3> -->
+                        <!-- <p></p> -->
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-max-small-size_1-of-1">
+                        
+                        <lightning-input class="slds-p-around_small" value={item.Start_Date__c} label="Start Date:"></lightning-input>
+                        <!-- <lightning-formatted-text class="slds-p-around_small" value={item.Start_Date__c} label="Start Date:"></lightning-formatted-text> -->
+                        <!-- <h3  class="slds-p-around_medium">Start Date:   {item.Start_Date__c}</h3> -->
+                        <!-- <p></p> -->
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-max-small-size_1-of-1">
+                        <lightning-input class="slds-p-around_small" value={item.End_Date__c} label="End Date:"></lightning-input>
+                        <!-- <lightning-formatted-text class="slds-p-around_small" value={item.End_Date__c} label="End Date:"></lightning-formatted-text> -->
+                        <!-- <h3  class="slds-p-around_medium">End Date:    {item.End_Date__c}</h3> -->
+                        <!-- <p>{item.End_Date__c}</p> -->
+                    </div>
+                </div>
+            </template>
+        </lightning-tab>
+    </lightning-tabset>  
+</lightning-card>
+
+</template> 
+<!-- Edit Model -->
+<template if:true={editFormModal}>
+    <!-- Model Start -->
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">       
+            <header class="slds-modal__header">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={editHideModalPopup}>
+                <lightning-icon icon-name="utility:close"
+                alternative-text="close"
+                variant="inverse"
+                size="small" ></lightning-icon>
+                <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 class="slds-text-heading_medium slds-hyphenate">Edit a Alumni</h2>
+            </header>
+        
+            <template for:each = {detailValue} for:item = "item" for:index="indexVar">
+        <div key={item.Id} class="slds-modal__content slds-p-around_medium">
+        
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                <lightning-input value={item.Name} type="text" label="Name" onchange={handleNameChange}></lightning-input>
+            </div>
+    <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+        <lightning-record-edit-form record-id={item.Id}  object-api-name="Alumni__c">
+            <lightning-input-field  field-name="Student__c"  onchange={handleSearchSelection}> </lightning-input-field>
+        </lightning-record-edit-form>
+            </div>
+    <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                <lightning-input value={item.Start_Date__c} type="date" label="Start Date" onchange={handleStartDateChange}></lightning-input>
+            </div>
+    <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                <lightning-input value={item.End_Date__c}  type="date" label="End Date" onchange={handleEndDateChange}></lightning-input>
+            </div>
+    </div>
+    
+        <footer class="slds-modal__footer">           
+            <button class="slds-button slds-button_brand" onclick={handleUpdate}>Update</button>
+        </footer>
+         </div>
+            </template>
+        </div>
+    </section>
+    <!-- Model End -->
+    <div class="slds-backdrop slds-backdrop_open">
+    </div>
+    </template>
+</template>
